@@ -74,7 +74,7 @@ device = "cuda" if torch.cuda.is_available() else "cpu"
 num_classes = 2
 frames_per_second = 30
 
-ckpt_path = "819model.pth"
+ckpt_path = "model/84.48model.pth"
 
 transform_params = {
     "side_size": 180,
