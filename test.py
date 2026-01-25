@@ -23,7 +23,7 @@ frames_per_second = 30
 # Paths (edit here)
 dataset_root = "accident_segmented"   # root folder with normal/ and anomalous/
 test_file = "accident_test.txt"       # file with test video list (only paths)
-ckpt_path = "819model.pth"
+ckpt_path = "model/84.48model.pth"
 
 # Transform parameters
 transform_params = {
