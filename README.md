@@ -59,7 +59,7 @@ Original project: [GitHub](https://github.com/cccxy-299/so-tad) | Dataset: [Hugg
 3. Inside `SO-TAD`, keep `so_tad.zip` and all `.z01`, `.z02`, etc. parts together. Right-click **`so_tad.zip`**, choose **7-Zip → Extract**, and extract the multipart archive once. Do not extract the numbered parts separately.
 4. Confirm the video paths are `SO-TAD/so_tad/train/*.mp4` and `SO-TAD/so_tad/test/*.mp4`.
 
-**Duplicate note:** The available SO-TAD release removed source `106` as a duplicate of `47`. SCAD retains `47_1.mp4`, and reconstructs its retained `106_2.mp4` entry from source 47, segment 2 (`47_2`), preserving the SCAD filename, label, and split.
+**Duplicate note:** During the initial SCAD curation, `47_2.mp4` and `106_2.mp4` were identified as duplicates, and `47_2.mp4` was removed while `106_2.mp4` was retained. However, the available SO-TAD release subsequently removed source `106` as a duplicate of source `47`. Therefore, reconstruction uses source `47`, segment 2 (`47_2`), to reproduce the retained `106_2.mp4` entry, preserving its original filename, label, and split. `47_1.mp4` remains unchanged.
 
 ### 4. CADP
 
@@ -68,7 +68,7 @@ Project and access instructions: [CADP](https://ankitshah009.github.io/accident_
 CADP provides numbered JPEG image sequences. The included **`manifests/cadp_include.txt`** selects only the **168 source folders** needed by SCAD.
 
 1. Read the CADP project's access instructions and install [rclone](https://rclone.org/downloads/).
-2. Optionally [create a personal Google API client ID and secret](https://rclone.org/drive/#making-your-own-client-id) to avoid shared-client rate limits. Keep the credentials private.
+2. To speed up downloads and reduce shared-client rate limits, [create your own Google API client ID and secret](https://rclone.org/drive/#making-your-own-client-id) and use them when configuring rclone. Keep these credentials private.
 3. Run `rclone config`. Create a Google Drive remote named **`cadp`**, add your personal credentials if available, and complete browser authorization. Under advanced settings set **`root_folder_id`** to `1BRIv9h4c_zbqJ6Ye4rVyFSo3K20BQt_v`. See the [rclone Google Drive guide](https://rclone.org/drive/) if prompted differently.
 4. From the cloned `SCAD` folder, verify the include file and download the selected folders:
 
