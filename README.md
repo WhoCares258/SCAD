@@ -1,27 +1,28 @@
+
 # SCAD: Surveillance Curated Accident Dataset
 
 **A curated benchmark for surveillance-based accident recognition.**
 
-SCAD combines footage from **CADP, SO-TAD, TU-DAT, and UCF-Crime** for binary **normal vs. accident/anomalous** video classification. It contains **1,122 balanced four-second clips** (561 per class), with fixed **train/validation/test splits of 778/112/232**. All clips are **30 FPS (120 frames)**, supporting reproducible comparisons across video models.
+SCAD combines footage from **CADP, SO-TAD, TU-DAT, and UCF-Crime** for binary **normal vs. accident/anomalous** video classification. It contains **1,122 balanced four-second clips** (561 per class), with fixed **train/validation/test splits of 778/112/232**. All clips are **30 FPS (120 frames)**, supporting reproducible comparisons across video recognition models.
 
-## Research papers
+## Research Papers
 
 **Dataset curation and initial benchmarking** (ETASR, June 2026)  
 [From Chaos to Detection: Accident Benchmarking in Surveillance Videos with a Curated Dataset and 3D CNNs](https://doi.org/10.48084/etasr.17024)
 
-**Follow-up video encoder benchmarking study** (in review; target release: early 2027)  
+**Follow-up video encoder benchmarking study** (In review; target release: early 2027)  
 *Benchmarking Video Encoders for Surveillance Accident Recognition*  
 Paper link: **Coming soon**.
 
 ## Reconstruct SCAD
 
-To respect the original dataset creators and their distribution terms, SCAD is provided through a reconstruction script and manifest rather than redistributing the source footage. Simply follow the steps below to download the four datasets and reconstruct SCAD with its original labels and splits.
+To respect the original dataset creators and their distribution terms, SCAD provides reconstruction code and manifests rather than redistributing video footage. Researchers can obtain the four source datasets directly from their respective providers and follow the steps below to reproduce SCAD with its original labels and splits.
 
-Some downloads may take time depending on your connection, but we've kept the instructions straightforward to make the process as easy as possible.
+Some downloads may take time depending on your connection, but we've kept the process straightforward and reproducible.
 
 **Requirements:** [Python 3.9+](https://www.python.org/downloads/), [FFmpeg and ffprobe](https://ffmpeg.org/download.html), [Git](https://git-scm.com/), and [7-Zip](https://www.7-zip.org/). Ensure `python`, `ffmpeg`, and `ffprobe` are available from your terminal.
 
-### Clone the repository
+### Clone the Repository
 
 ```powershell
 git clone https://github.com/WhoCares258/SCAD.git
@@ -34,7 +35,7 @@ cd SCAD
 
 1. Read the **dataset-access instructions below the abstract** in the [TU-DAT paper](https://www.mdpi.com/1424-8220/25/11/3259), then open the [Google Drive dataset folder](https://drive.google.com/drive/folders/1qsORgV4p4yn-hxsVFYKdRZePYL2m_ncj).
 2. Click the **three-dot menu** beside `Positive_Vidoes` and choose **Download**. Google Drive may take several minutes to prepare the ZIP.
-3. Extract the archive and place the `Positive_Vidoes` folder in `SCAD/`, keeping its original spelling. Videos should appear as `Positive_Vidoes/*.mov`.
+3. Extract the archive and place the `Positive_Vidoes` folder inside `SCAD/`, keeping its original spelling. Videos should appear as `Positive_Vidoes/*.mov`.
 
 ### 2. UCF-Crime
 
@@ -61,7 +62,7 @@ Original project: [GitHub](https://github.com/cccxy-299/so-tad) | Dataset: [Hugg
 3. Inside `SO-TAD`, keep `so_tad.zip` and all `.z01`, `.z02`, etc. parts together. Right-click **`so_tad.zip`**, choose **7-Zip → Extract**, and extract the multipart archive once. Do not extract the numbered parts separately.
 4. Confirm the video paths are `SO-TAD/so_tad/train/*.mp4` and `SO-TAD/so_tad/test/*.mp4`.
 
-**Duplicate note:** During the initial SCAD curation, `47_2.mp4` and `106_2.mp4` were identified as duplicates, and `47_2.mp4` was removed while `106_2.mp4` was retained. However, the available SO-TAD release subsequently removed source `106` as a duplicate of source `47`. Therefore, reconstruction uses source `47`, segment 2 (`47_2`), to reproduce the retained `106_2.mp4` entry, preserving its original filename, label, and split. `47_1.mp4` remains unchanged.
+**Duplicate note:** During the initial SCAD curation, `47_2.mp4` and `106_2.mp4` were identified as duplicates, and `47_2.mp4` was removed while `106_2.mp4` was retained. However, the available SO-TAD release subsequently removed source `106` as a duplicate of source `47`. Therefore, reconstruction uses source `47`, segment 2 (`47_2`), as a substitute for the retained `106_2.mp4` entry, preserving its original filename, label, and split. `47_1.mp4` remains unchanged.
 
 ### 4. CADP
 
@@ -71,7 +72,7 @@ CADP provides numbered JPEG image sequences. The included **`manifests/cadp_incl
 
 1. Read the CADP project's access instructions and install [rclone](https://rclone.org/downloads/).
 2. To speed up downloads and reduce shared-client rate limits, [create your own Google API client ID and secret](https://rclone.org/drive/#making-your-own-client-id) and use them when configuring rclone. Keep these credentials private.
-3. Run `rclone config`. Create a Google Drive remote named **`cadp`**, add your personal credentials if available, and complete browser authorization. Under advanced settings set **`root_folder_id`** to `1BRIv9h4c_zbqJ6Ye4rVyFSo3K20BQt_v`. See the [rclone Google Drive guide](https://rclone.org/drive/) if prompted differently.
+3. Run `rclone config`. Create a Google Drive remote named **`cadp`**, enter your personal API credentials, and complete browser authorization. Under advanced settings, set **`root_folder_id`** to `1BRIv9h4c_zbqJ6Ye4rVyFSo3K20BQt_v`. See the [rclone Google Drive guide](https://rclone.org/drive/) if prompted differently.
 4. From the cloned `SCAD` folder, verify the include file and download the selected folders:
 
    ```powershell
@@ -81,7 +82,7 @@ CADP provides numbered JPEG image sequences. The included **`manifests/cadp_incl
 
    `Test-Path` should show `True`. Frames will appear as `CADP/000002/0.jpg`, etc. A personal API client does not bypass Google Drive access restrictions or the source owner's permissions.
 
-## Final folder layout
+## Final Folder Layout
 
 Once downloaded, your cloned repository should look like:
 
@@ -110,7 +111,7 @@ SCAD/
     └── ...
 ```
 
-## Generate the dataset
+## Generate the Dataset
 
 From inside `SCAD`, run:
 
@@ -124,15 +125,23 @@ To regenerate existing clips:
 python .\scripts\reconstruct_scad.py --overwrite
 ```
 
-The script reconstructs all **1,122 SCAD clips**, preserving their original labels and dataset splits.
+The script reconstructs all **1,122 SCAD clips**, preserving their original filenames, labels, and dataset splits.
 
-All clips have been successfully reconstructed and verified through SSIM comparison or manual visual inspection. **SCAD is now ready for reproducible research and benchmarking.**
+All clips have been successfully reconstructed and verified through SSIM comparison or manual visual inspection. The public reconstruction script was also tested against the original SCAD reference, reproducing the same validation results.
 
-## Use and citation
+**SCAD is ready for reproducible research and benchmarking.**
 
-**Academic and non-commercial research use only. Do not redistribute the original source footage or reconstructed SCAD video clips.** Obtain footage from its respective providers and comply with each provider's access and usage terms. This repository publishes reconstruction code, instructions, and manifests, not third-party videos. It does not grant rights beyond those provided by the original dataset owners.
+## Use and Citation
 
-Please cite **SCAD and all four contributing datasets**:
+**SCAD is intended for academic and non-commercial research. Redistribution of the original source footage or reconstructed SCAD video clips is not authorized by this repository.**
+
+To respect the intellectual property and contributions of the original dataset creators, this repository distributes only reconstruction code, manifests, and documentation. Researchers must obtain the footage directly from its respective providers, comply with their access and usage conditions, and acknowledge the original sources.
+
+All rights to the underlying videos remain with their respective rights holders. SCAD's research-use conditions do not replace or override the terms of the contributing datasets. Researchers considering other forms of use should obtain the appropriate permissions from the relevant rights holders.
+
+We sincerely appreciate the researchers and institutions behind CADP, SO-TAD, TU-DAT, and UCF-Crime for making their valuable datasets available to the research community.
+
+**If SCAD supports your research, please cite the SCAD dataset paper and the four contributing datasets below.**
 
 ### SCAD
 
