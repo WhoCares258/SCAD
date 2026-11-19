@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Reconstruct the SCAD clips from independently downloaded source datasets.
 
-Run from anywhere: python SCAD/scripts/reconstruct_scad.py
-The script expects the SCAD Git repo and four source folders to share a parent.
+Run from the cloned SCAD repository: python scripts/reconstruct_scad.py
+The script expects all four source folders directly inside the SCAD repository.
 Requires FFmpeg and FFprobe on PATH; Python standard library only.
 """
 import argparse
@@ -12,7 +12,6 @@ import subprocess
 from collections import Counter
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[2]
 VIDEO_SUFFIXES = {'.mp4', '.mov', '.avi', '.mkv', '.mpeg', '.mpg'}
 
 
@@ -147,7 +146,7 @@ def main():
     ap.add_argument('--overwrite', action='store_true', help='Regenerate existing output clips')
     args = ap.parse_args()
     repo = Path(__file__).resolve().parents[1]
-    root = repo.parent
+    root = repo
     rows = load_manifest(repo / 'manifests' / 'scad_manifest.csv')
     indexed = index_sources(root)
     cache = repo / 'temp'
