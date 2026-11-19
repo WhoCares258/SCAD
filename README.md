@@ -15,7 +15,9 @@ Paper link: **Coming soon**.
 
 ## Reconstruct SCAD
 
-This repository provides the reconstruction script and manifest defining the exact clips, labels, and splits. **Download the original footage separately** from the source providers.
+To respect the original dataset creators and their distribution terms, SCAD is provided through a reconstruction script and manifest rather than redistributing the source footage. Simply follow the steps below to download the four datasets and reconstruct SCAD with its original labels and splits.
+
+Some downloads may take time depending on your connection, but we've kept the instructions straightforward to make the process as easy as possible.
 
 **Requirements:** [Python 3.9+](https://www.python.org/downloads/), [FFmpeg and ffprobe](https://ffmpeg.org/download.html), [Git](https://git-scm.com/), and [7-Zip](https://www.7-zip.org/). Ensure `python`, `ffmpeg`, and `ffprobe` are available from your terminal.
 
