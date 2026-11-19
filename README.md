@@ -57,7 +57,7 @@ Original project: [GitHub](https://github.com/cccxy-299/so-tad) | Dataset: [Hugg
    ```
 
 3. Inside `SO-TAD`, keep `so_tad.zip` and all `.z01`, `.z02`, etc. parts together. Right-click **`so_tad.zip`**, choose **7-Zip → Extract**, and extract the multipart archive once. Do not extract the numbered parts separately.
-4. Confirm the video paths are `SO-TAD/so_tad/train/*.mp4` and `SO-TAD/so_tad/test/*.mp4`. If necessary, remove an extra enclosing extraction folder.
+4. Confirm the video paths are `SO-TAD/so_tad/train/*.mp4` and `SO-TAD/so_tad/test/*.mp4`.
 
 **Duplicate note:** The available SO-TAD release removed source `106` as a duplicate of `47`. SCAD retains `47_1.mp4`, and reconstructs its retained `106_2.mp4` entry from source 47, segment 2 (`47_2`), preserving the SCAD filename, label, and split.
 
