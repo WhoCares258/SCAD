@@ -122,9 +122,9 @@ To regenerate existing clips:
 python .\scripts\reconstruct_scad.py --overwrite
 ```
 
-The script creates **1,122 clips** under `SCAD_output/train/`, `SCAD_output/val/`, and `SCAD_output/test/`, each with `anomalous/` and `normal/` subfolders. It automatically applies the source-specific frame processing, four-second duration, 30 FPS output, three-second stride, and last-frame padding.
+The script reconstructs all **1,122 SCAD clips**, preserving their original labels and dataset splits.
 
-**Verification:** All 1,122 clips have been verified by SSIM comparison or manual visual inspection. The public script does not require reference SCAD videos or run SSIM checks.
+All clips have been successfully reconstructed and verified through SSIM comparison or manual visual inspection. **SCAD is now ready for reproducible research and benchmarking.**
 
 ## Use and citation
 
