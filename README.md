@@ -81,19 +81,36 @@ Original project: [GitHub](https://github.com/cccxy-299/so-tad) | Dataset: [Hugg
 
 ### 4. CADP
 
+
+### 4. CADP
+
 Project and access instructions: [CADP](https://ankitshah009.github.io/accident_forecasting_traffic_camera) | [Original JPEG frame collection](https://drive.google.com/drive/folders/1BRIv9h4c_zbqJ6Ye4rVyFSo3K20BQt_v)
 
 CADP provides numbered JPEG image sequences. The included **`manifests/cadp_include.txt`** selects only the **168 source folders** needed by SCAD.
 
-1. Read the CADP project's access instructions and install [rclone](https://rclone.org/downloads/).
-2. Run `rclone config` and create a Google Drive remote named **`cadp`**. Complete Google authentication and leave `root_folder_id` at its default value. For improved download performance, users may optionally [configure their own Google API client credentials](https://rclone.org/drive/#making-your-own-client-id).
-3. From the cloned `SCAD` folder, download the selected source folders:
+1. Read the CADP project's access instructions and [download rclone for Windows](https://rclone.org/downloads/). Extract the ZIP and open PowerShell in the folder containing `rclone.exe`.
+
+2. Configure a Google Drive remote named **`cadp`** by running:
 
    ```powershell
-   rclone copy cadp: .\CADP --drive-root-folder-id 1BRIv9h4c_zbqJ6Ye4rVyFSo3K20BQt_v --include-from .\manifests\cadp_include.txt -P
+   .\rclone.exe config
    ```
 
-The command downloads only the required CADP source folders into `SCAD/CADP/`. Frames will appear as `CADP/000002/0.jpg`, etc. Access remains subject to the original dataset owner's permissions.
+   Select Google Drive (`drive`), complete authentication, and retain the default root folder settings. For reliable access, [configure your own Google API client credentials](https://rclone.org/drive/#making-your-own-client-id).
+
+3. Set the path to your cloned SCAD repository and download the selected CADP folders:
+
+   ```powershell
+   $scad = "C:\path\to\SCAD"
+
+   .\rclone.exe copy "cadp,root_folder_id=1BRIv9h4c_zbqJ6Ye4rVyFSo3K20BQt_v:" "$scad\CADP" --include-from "$scad\manifests\cadp_include.txt" --transfers 8 --checkers 8 --tpslimit 4 -P
+   ```
+
+   Replace `C:\path\to\SCAD` with the actual location of your cloned repository.
+
+The command downloads the selected source folders directly into `SCAD/CADP/`, with frames organized as `CADP/000002/0.jpg`, etc.
+
+Alternatively, researchers may download CADP to any local directory and move the resulting `CADP` folder into the cloned SCAD repository before running the reconstruction script. Access remains subject to the original dataset owner's permissions.
 
 
 ## Final Folder Layout
