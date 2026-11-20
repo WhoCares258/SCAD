@@ -1,4 +1,3 @@
-
 # SCAD: Surveillance Curated Accident Dataset
 
 **A curated benchmark for surveillance-based accident recognition.**
