@@ -78,6 +78,7 @@ Original project: [GitHub](https://github.com/cccxy-299/so-tad) | Dataset: [Hugg
 
 **Duplicate note:** During the initial SCAD curation, `47_2.mp4` and `106_2.mp4` were identified as duplicates, and `47_2.mp4` was removed while `106_2.mp4` was retained. However, the available SO-TAD release subsequently removed source `106` as a duplicate of source `47`. Therefore, reconstruction uses source `47`, segment 2 (`47_2`), as a substitute for the retained `106_2.mp4` entry, preserving its original filename, label, and split. `47_1.mp4` remains unchanged.
 
+
 ### 4. CADP
 
 Project and access instructions: [CADP](https://ankitshah009.github.io/accident_forecasting_traffic_camera) | [Original JPEG frame collection](https://drive.google.com/drive/folders/1BRIv9h4c_zbqJ6Ye4rVyFSo3K20BQt_v)
@@ -85,16 +86,15 @@ Project and access instructions: [CADP](https://ankitshah009.github.io/accident_
 CADP provides numbered JPEG image sequences. The included **`manifests/cadp_include.txt`** selects only the **168 source folders** needed by SCAD.
 
 1. Read the CADP project's access instructions and install [rclone](https://rclone.org/downloads/).
-2. To speed up downloads and reduce shared-client rate limits, [create your own Google API client ID and secret](https://rclone.org/drive/#making-your-own-client-id) and use them when configuring rclone. Keep these credentials private.
-3. Run `rclone config`. Create a Google Drive remote named **`cadp`**, enter your personal API credentials, and complete browser authorization. Under advanced settings, set **`root_folder_id`** to `1BRIv9h4c_zbqJ6Ye4rVyFSo3K20BQt_v`. See the [rclone Google Drive guide](https://rclone.org/drive/) if prompted differently.
-4. From the cloned `SCAD` folder, verify the include file and download the selected folders:
+2. Run `rclone config` and create a Google Drive remote named **`cadp`**. Complete Google authentication and leave `root_folder_id` at its default value. For improved download performance, users may optionally [configure their own Google API client credentials](https://rclone.org/drive/#making-your-own-client-id).
+3. From the cloned `SCAD` folder, download the selected source folders:
 
    ```powershell
-   Test-Path .\manifests\cadp_include.txt
-   rclone copy cadp: .\CADP --include-from .\manifests\cadp_include.txt -P
+   rclone copy cadp: .\CADP --drive-root-folder-id 1BRIv9h4c_zbqJ6Ye4rVyFSo3K20BQt_v --include-from .\manifests\cadp_include.txt -P
    ```
 
-   `Test-Path` should show `True`. Frames will appear as `CADP/000002/0.jpg`, etc. A personal API client does not bypass Google Drive access restrictions or the source owner's permissions.
+The command downloads only the required CADP source folders into `SCAD/CADP/`. Frames will appear as `CADP/000002/0.jpg`, etc. Access remains subject to the original dataset owner's permissions.
+
 
 ## Final Folder Layout
 
