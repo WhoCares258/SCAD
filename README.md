@@ -1,3 +1,4 @@
+
 # SCAD: Surveillance Curated Accident Dataset
 
 **A curated benchmark for surveillance-based accident recognition.**
@@ -10,8 +11,22 @@ SCAD combines footage from **CADP, SO-TAD, TU-DAT, and UCF-Crime** for binary **
 [From Chaos to Detection: Accident Benchmarking in Surveillance Videos with a Curated Dataset and 3D CNNs](https://doi.org/10.48084/etasr.17024)
 
 **Follow-up video encoder benchmarking study** (In review; target release: early 2027)  
-*Benchmarking Video Encoders for Surveillance Accident Recognition*  
+*A Comparative Study of Pretrained Video Encoders for Surveillance Accident Recognition*  
 Paper link: **Coming soon**.
+
+### Experimental Scripts for the Follow-up Study
+
+The experimental scripts accompanying the video encoder benchmarking study are available in [`scripts/encoder_benchmark/`](scripts/encoder_benchmark/).
+
+The scripts are organized according to the study's experimental framework:
+
+- **Stage I: Model Screening** ([`stage1_screening/`](scripts/encoder_benchmark/stage1_screening/)): Initial screening of 37 pretrained configurations across 20 model groups.
+- **Stage II: Latency Profiling** ([`stage2_profiling/`](scripts/encoder_benchmark/stage2_profiling/)): OpenCV and NVIDIA NVDEC file-to-decision latency profiling of 17 shortlisted configurations.
+- **Stage III: Five-Seed Evaluation** ([`stage3_five_seed/`](scripts/encoder_benchmark/stage3_five_seed/)): Training, evaluation, and latency assessment of ten finalist configurations across five random seeds.
+- **External Evaluation** ([`external_evaluation/`](scripts/encoder_benchmark/external_evaluation/)): Complementary experiments involving DAD, CCD, and ACCIDENT-derived surveillance data.
+- **Analysis** ([`analysis/`](scripts/encoder_benchmark/analysis/)): Supporting experimental analysis and evidence extraction.
+
+These scripts are provided as **research reference implementations and supporting experimental records** to document the methods employed in the study. They are preserved for methodological transparency and reproducibility reference rather than as a standalone executable package. Execution may require the original experimental environment, datasets, pretrained checkpoints, external model repositories, and associated dependencies.
 
 ## Reconstruct SCAD
 
@@ -89,7 +104,13 @@ Once downloaded, your cloned repository should look like:
 SCAD/
 ├── README.md
 ├── scripts/
-│   └── reconstruct_scad.py
+│   ├── reconstruct_scad.py
+│   └── encoder_benchmark/
+│       ├── stage1_screening/
+│       ├── stage2_profiling/
+│       ├── stage3_five_seed/
+│       ├── external_evaluation/
+│       └── analysis/
 ├── manifests/
 │   ├── scad_manifest.csv
 │   └── cadp_include.txt
